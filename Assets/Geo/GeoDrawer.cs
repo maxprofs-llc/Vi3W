@@ -38,7 +38,7 @@ public class GeoDrawer : MonoBehaviour
 
 			VectorLine line = new VectorLine(point.Key, vertexes, lineMaterial.GetTexture(0), lineThickness, LineType.Continuous, Joins.Weld);
 			line.material = lineMaterial;
-			line.Draw3D();
+			line.Draw();
 			lines.Add(line);
 		}
 	}
@@ -90,7 +90,7 @@ public class GeoDrawer : MonoBehaviour
 
 		for(int a = 0; a<lines.Count; a++)
 		{
-			lines[a].Draw3D();
+			lines[a].Draw();
 		}
 
 	}
