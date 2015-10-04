@@ -1,4 +1,5 @@
-public class W3Object {
+public class W3Object
+{
 	public string name;
 	public string type;
 	public string tag;
@@ -7,6 +8,7 @@ public class W3Object {
 	public string indicator;
 }
 
-public class W3Number : W3Object {
+public class W3Number : W3Object
+{
 	public double value;
 }

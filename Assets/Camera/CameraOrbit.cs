@@ -14,7 +14,7 @@ public class CameraOrbit : MonoBehaviour
 {
     public Transform target;
     public Vector3 targetOffset;
-    private float distance = 1.0f;
+    private float distance = 1200f;
     private float maxDistance = 30000;
     private float minDistance = 1f;
     private float xSpeed = 155.0f;

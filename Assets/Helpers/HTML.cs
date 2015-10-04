@@ -26,7 +26,7 @@ public class HTMLInterface {
 		var assets = Resources.Load("sample-data") as TextAsset;
 		string text = assets.text;
 		
-		return JSONObject(text);
+		return new JSONObject(text);
 	}
 	
 	public List<List<W3Object>> getLists(Dictionary<string,string> query, string url) {
@@ -52,7 +52,7 @@ public class HTMLInterface {
 			for(int i = 0;i < indicatorCount; i++) {
 				var obj = new W3Number();
 				
-				obj.value = double.Parse(item["d"][item["d"].keys[i]].str,  CultureInfo.InvariantCulture);
+				obj.value = item["d"][item["d"].keys[i]].n;
 				obj.type = item["type"].str;
 				obj.tag = item["tag"].str;
 				obj.indicator = item["d"].keys[i];

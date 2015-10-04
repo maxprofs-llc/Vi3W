@@ -13,6 +13,7 @@ namespace Assets
     public class Tile : MonoBehaviour
     {
         public Rect Rect;
+        private bool offline = true;
         Dictionary<Vector3, BuildingHolder> BuildingDictionary { get; set; }
 
         public Tile()
@@ -27,7 +28,7 @@ namespace Assets
             var url = "http://vector.mapzen.com/osm/water,earth,buildings,roads,landuse/" + zoom + "/";
 
             JSONObject mapData;
-            if (File.Exists(tilename))
+            if (File.Exists(tilename) || offline)
             {
                 var r = new StreamReader(tilename, Encoding.Default);
                 mapData = new JSONObject(r.ReadToEnd());
