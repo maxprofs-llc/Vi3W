@@ -4,13 +4,14 @@ using UnityEngine;
 using Assets.Helpers;
 using Assets.Models;
 using System.Globalization;
+using UnityEngine;
 
-public class HTMLInterface : MonoBehaviour {
+public class HTMLInterface {
 	private bool fetching = true;
 	public JSONObject data;
 	public List<List<W3Object>> lists;
 	
-	public IEnumerator getJSON(Dictionary<string,string> query, string url) {
+	public JSONObject getJSON(Dictionary<string,string> query, string url) {
 		string queryString = "?";
 		foreach(KeyValuePair<string,string> item in query) {
 			queryString += item.Key + "=" + item.Value + "&";
@@ -19,16 +20,21 @@ public class HTMLInterface : MonoBehaviour {
 			queryString = "";
 		}
 		
-		var www = new WWW(url + queryString);
-		yield return www;
+		//var www = new WWW(url + queryString);
+		//yield return www;
 		
-		data = new JSONObject(www.text);
-		fetching = false;
+		var assets = Resources.Load("sample-data") as TextAsset;
+		string text = assets.text;
+		
+		return JSONObject(text);
 	}
 	
-	public IEnumerator getLists() {
-		while(fetching)
-			yield return new WaitForSeconds(0.1f);
+	public List<List<W3Object>> getLists(Dictionary<string,string> query, string url) {
+		this.data = this.getJSON(query, url);
+	
+		//while(fetching)
+		//	yield return new WaitForSeconds(0.1f);
+
 		int indicatorCount = 0;
 		if(data != null && data.list.Count > 0) {
 			var first = data.list[0];
@@ -59,5 +65,6 @@ public class HTMLInterface : MonoBehaviour {
 		}
 		
 		this.lists = res;
+		return res;
 	}
 }
