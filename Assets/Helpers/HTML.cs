@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.Helpers;
+using Assets.Models;
+using System.Globalization;
 
 public class HTMLInterface : MonoBehaviour {
-	/*public JSONObject data;
-	public List<list<W3Object>> lists;
+	private bool fetching = true;
+	public JSONObject data;
+	public List<List<W3Object>> lists;
 	
 	public IEnumerator getJSON(Dictionary<string,string> query, string url) {
 		string queryString = "?";
@@ -19,12 +23,17 @@ public class HTMLInterface : MonoBehaviour {
 		yield return www;
 		
 		data = new JSONObject(www.text);
+		fetching = false;
 	}
 	
 	public IEnumerator getLists() {
+		while(fetching)
+			yield return new WaitForSeconds(0.1f);
 		int indicatorCount = 0;
 		if(data != null && data.list.Count > 0) {
-			indicatorCount = data.list[0]['v'].Keys.Count;
+			var first = data.list[0];
+			var keys = first["d"].keys;
+			indicatorCount = keys.Count;
 		}
 		
 		var res = new List<List<W3Object>>();
@@ -37,18 +46,18 @@ public class HTMLInterface : MonoBehaviour {
 			for(int i = 0;i < indicatorCount; i++) {
 				var obj = new W3Number();
 				
-				obj.value = double.parse(item["v"][item["v"].Keys[i]],  CultureInfo.InvariantCulture);
-				obj.type = item["type"];
-				obj.tag = item["tag"];
-				obj.indicator = item["v"].Keys[i];
-				obj.name = item["name"];
-				obj.longtitude = double.parse(item["longtitude"],  CultureInfo.InvariantCulture);
-				obj.latitude = double.parse(item["latitude"],  CultureInfo.InvariantCulture);
+				obj.value = double.Parse(item["d"][item["d"].keys[i]].str,  CultureInfo.InvariantCulture);
+				obj.type = item["type"].str;
+				obj.tag = item["tag"].str;
+				obj.indicator = item["d"].keys[i];
+				obj.name = item["Name"].str;
+				obj.longitude = double.Parse(item["long"].str,  CultureInfo.InvariantCulture);
+				obj.latitude = double.Parse(item["lat"].str,  CultureInfo.InvariantCulture);
 				
 				res[i].Add(obj);
 			}
 		}
 		
 		this.lists = res;
-	}*/
+	}
 }

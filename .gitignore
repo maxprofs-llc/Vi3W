@@ -1,5 +1,3 @@
-Assets/Plugins/Vectrosity.dll
-
 # =============== #
 # Unity generated #
 # =============== #
@@ -34,3 +32,9 @@ sysinfo.txt
 Icon?
 ehthumbs.db
 [Tt]humbs.db
+
+*~HEAD
+
+Assets/Geo/tester.cs*
+Assets/Helpers/HTMLTest.cs*
+Assets/Plugins/Vectrosity.dll*
