@@ -9,7 +9,6 @@ public class GeoParser
 		TextAsset districtsAsset = Resources.Load("nepal-districts") as TextAsset;
 		string districts = districtsAsset.text;
 
-
 		var data = new JSONObject(districts);
 		var res = new Dictionary<string, List<Vector2>>();
 
@@ -19,9 +18,9 @@ public class GeoParser
 			List<Vector2> arc = new List<Vector2>();
 			if (district != null)
 			{
-				foreach (var point in district["properties"]["geometry"]["coordinates"].list[0].list)
+				foreach (var point in district["geometry"]["coordinates"].list[0].list)
 				{
-					arc.Add(new Vector2(float.Parse(point.list[0].str), float.Parse(point.list[1].str)));
+					arc.Add(new Vector2(point.list[0].n, point.list[1].n));
 				}
 			}
 			else
@@ -45,8 +44,9 @@ public class GeoParser
 		foreach (var city in data["features"].list)
 		{
 			string name = city["properties"]["HQ_NAME"].str;
-			float longtitude = float.Parse(city["properties"]["geometry"]["coordinates"].list[0].str);
-			float latitude = float.Parse(city["properties"]["geometry"]["coordinates"].list[1].str);
+
+			float longtitude = city["geometry"]["coordinates"].list[0].n;
+			float latitude = city["geometry"]["coordinates"].list[1].n;
 			Vector2 point = new Vector2(longtitude, latitude);
 
 			res[name] = point;

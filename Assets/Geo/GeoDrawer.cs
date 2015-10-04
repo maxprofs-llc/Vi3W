@@ -9,7 +9,7 @@ public class GeoDrawer : MonoBehaviour
 	private Material lineMaterial;
 	private List<VectorLine> lines;
 	private float lineThickness = 4f;
-	private float distanceToCenter = 12f;
+	private float distanceToCenter = 11f;
 	private GeoParser GP;
 
 
@@ -49,9 +49,9 @@ public class GeoDrawer : MonoBehaviour
 		{
 
 
-			Vector3 xyzcity = XYZfromLatLon(point.Value.x, point.Value.y);
+			Vector3 xyzcity = XYZfromLatLon(point.Value.y, point.Value.x);
 			GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-			obj.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+			obj.transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
 			obj.transform.position = xyzcity;
 			obj.GetComponent<Renderer>().material.color = Color.red;
 			obj.name = point.Key;
