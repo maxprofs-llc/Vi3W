@@ -2,7 +2,7 @@ public class W3Object {
 	public string name;
 	public string type;
 	public string tag;
-	public double longtitude;
+	public double longitude;
 	public double latitude;
 	public string indicator;
 }
