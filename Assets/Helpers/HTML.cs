@@ -23,7 +23,7 @@ public class HTMLInterface {
 		//var www = new WWW(url + queryString);
 		//yield return www;
 		
-		var assets = Resources.Load("sample-data") as TextAsset;
+		var assets = Resources.Load(url) as TextAsset;
 		string text = assets.text;
 		
 		return new JSONObject(text);

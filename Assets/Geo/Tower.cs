@@ -11,6 +11,8 @@ public class Tower : MonoBehaviour
 	private GUIStyle guiStyleFore;
 	private GUIStyle guiStyleBack;
 	private W3Number W3 = null;
+	public Color baseColor = Color.white;
+	int type = 0;
 
 
 
@@ -28,6 +30,16 @@ public class Tower : MonoBehaviour
 		guiStyleBack.wordWrap = true;
 	}
 
+	public void SetColor(Color col)
+	{
+		baseColor = col;
+	}
+
+	public void SetType(int tp)
+	{
+		type = tp;
+	}
+
 	public void SetW3(W3Number W3n)
 	{
 		W3 = W3n;
@@ -36,6 +48,7 @@ public class Tower : MonoBehaviour
 		tooltip += "\n" + "Type: " + (string)W3.type;
 		tooltip += "\n" + "Tag: " + (string)W3.tag;
 		tooltip += "\n" + "Indicator: " + (string)(W3.indicator).ToString();
+		tooltip += "\n" + "Value: " + (string)(W3.value).ToString();
 		tooltip += "\n" + "\n" + "Latitude: " + (string)W3.latitude.ToString();
 		tooltip += "\n" + "Longitude: " + (string)W3.longitude.ToString();
 
@@ -52,7 +65,7 @@ public class Tower : MonoBehaviour
 	}
 	void OnMouseExit()
 	{
-		rend.material.color = Color.red;
+		rend.material.color = baseColor;
 		currentToolTipText = "";
 	}
 
@@ -72,6 +85,24 @@ public class Tower : MonoBehaviour
 			var y = Event.current.mousePosition.y;
 			GUI.Label (new Rect (x - 149, y + 21, 300, 60), currentToolTipText, guiStyleBack);
 			GUI.Label (new Rect (x - 150, y + 20, 300, 60), currentToolTipText, guiStyleFore);
+		}
+	}
+
+	void Update ()
+	{
+		if (Input.GetKeyUp("1"))
+		{
+			if (type == 1)
+			{
+				rend.enabled = !rend.enabled;
+			}
+		}
+		if (Input.GetKeyUp("2"))
+		{
+			if (type == 2)
+			{
+				rend.enabled = !rend.enabled;
+			}
 		}
 	}
 

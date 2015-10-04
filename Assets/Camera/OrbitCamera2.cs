@@ -18,7 +18,7 @@ public class OrbitCamera2 : MonoBehaviour
  public float _ySpeed = 1f;
   
  //The position of the cursor on the screen. Used to rotate the camera.
- private float _x = 0.0f;
+ private float _x = 1000.0f;
  private float _y = 0.0f;
   
  //Distance vector. 

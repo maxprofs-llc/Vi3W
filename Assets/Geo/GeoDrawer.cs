@@ -79,11 +79,13 @@ public class GeoDrawer : MonoBehaviour
 	public void GetTestHTML()
 	{
 		HTMLInterface html = new HTMLInterface();
-		List<List<W3Object>> districtData = html.getLists(new Dictionary<string, string>() , "potato");
-		DrawTowers(districtData);
+		List<List<W3Object>> districtData = html.getLists(new Dictionary<string, string>() , "sample-data");
+		List<List<W3Object>> districtData2 = html.getLists(new Dictionary<string, string>() , "example_humanitarian");
+		DrawTowers(districtData, Color.red, 1, 1f);
+		DrawTowers(districtData2, Color.blue, 2, 0.3f);
 	}
 
-	public void DrawTowers(List<List<W3Object>> objects)
+	public void DrawTowers(List<List<W3Object>> objects, Color clr, int type, float scale)
 	{
 		int index = 0;
 		int number = 0;
@@ -96,14 +98,16 @@ public class GeoDrawer : MonoBehaviour
 				float value = (float)ObjNumber.value + 1;
 
 				GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
-				obj.transform.localScale = new Vector3(towerEdgeSize, towerEdgeSize, towerEdgeSize * towerHeigthScale * (float)value);
-				obj.GetComponent<Renderer>().material.color = Color.red;
+				obj.transform.localScale = new Vector3(towerEdgeSize, towerEdgeSize, towerEdgeSize * towerHeigthScale * scale * (float)value);
+				obj.GetComponent<Renderer>().material.color = clr;
 				obj.name = "tower";
 
 				obj.transform.position = XYZfromLatLon((float)ObjNumber.latitude, (float)ObjNumber.longitude);
 				obj.transform.LookAt(this.transform);
 				Tower twr =  obj.AddComponent<Tower>() as Tower;
 				twr.SetW3(ObjNumber);
+				twr.SetColor(clr);
+				twr.SetType(type);
 			}
 
 		}
