@@ -50,9 +50,9 @@ public class HTMLInterface : MonoBehaviour {
 				obj.type = item["type"].str;
 				obj.tag = item["tag"].str;
 				obj.indicator = item["d"].keys[i];
-				obj.name = item["name"].str;
-				obj.longitude = double.Parse(item["longitude"].str,  CultureInfo.InvariantCulture);
-				obj.latitude = double.Parse(item["latitude"].str,  CultureInfo.InvariantCulture);
+				obj.name = item["Name"].str;
+				obj.longitude = double.Parse(item["long"].str,  CultureInfo.InvariantCulture);
+				obj.latitude = double.Parse(item["lat"].str,  CultureInfo.InvariantCulture);
 				
 				res[i].Add(obj);
 			}
