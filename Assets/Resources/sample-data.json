@@ -1,0 +1,3 @@
+[ { "Name":"kathmandu", "lat":"27.70169", "long":"85.3206", "tag": "health", "type": "baseline", "d":{ "Deaths": 1222, "Deaths percentage": 0 } },
+  { "Name":"kathmandu", "lat":"27.70169", "long":"85.3206", "tag": "housing", "type": "feedback", "d":{ "Is it your main concern?": 141, "Is it your main concern? percentage": 0 } },
+  { "Name":"kathmandu", "lat":"27.70169", "long":"85.3206", "tag": "finantial", "type": "humanitarian", "d":{ "Restored infrastructure": 0, "Restored infrastructure percentage": 0 } } ]
