@@ -49,10 +49,13 @@
      <Compile Include="Assets\Camera\MouseControl.cs" />
      <Compile Include="Assets\Camera\OrbitCamera2.cs" />
      <Compile Include="Assets\Geo\GeoDrawer.cs" />
+     <Compile Include="Assets\Geo\GeoParser.cs" />
      <Compile Include="Assets\Helpers\Extensions.cs" />
      <Compile Include="Assets\Helpers\GeoConverter.cs" />
+     <Compile Include="Assets\Helpers\HTML.cs" />
      <Compile Include="Assets\Helpers\JSON.cs" />
      <Compile Include="Assets\Helpers\Triangulator.cs" />
+     <Compile Include="Assets\Helpers\types.cs" />
      <Compile Include="Assets\Materials\ObjectonGlobe.cs" />
      <Compile Include="Assets\Models\BuildingHolder.cs" />
      <Compile Include="Assets\Models\BuildingPolygon.cs" />

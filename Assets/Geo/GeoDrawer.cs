@@ -3,18 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using Vectrosity;
 
-public class GeoDrawer : MonoBehaviour 
+
+public class GeoDrawer : MonoBehaviour
 {
 	private Material lineMaterial;
 	private List<VectorLine> lines;
 	private float lineThickness = 4f;
 	private float distanceToCenter = 12f;
+	private GeoParser GP;
 
 
 	void Start ()
 	{
 		lineMaterial = Resources.Load("DefaultLine3D") as Material;
 		lines = new List<VectorLine>();
+		GP = new GeoParser();
 
 	}
 
@@ -23,7 +26,7 @@ public class GeoDrawer : MonoBehaviour
 
 
 		foreach (KeyValuePair<string, List<Vector2>> point in list)
-		{			
+		{
 
 			List<Vector3> vertexes = new List<Vector3>();
 			List<Vector2> latlon =  (List<Vector2>)point.Value;
@@ -32,11 +35,11 @@ public class GeoDrawer : MonoBehaviour
 			{
 				Vector3 xyzpoint = XYZfromLatLon(latlon[i].x, latlon[i].y);
 				vertexes.Add(xyzpoint);
-			}			
+			}
 
 			VectorLine line = new VectorLine(point.Key, vertexes, lineMaterial.GetTexture(0), lineThickness, LineType.Continuous, Joins.Weld);
-        	line.material = lineMaterial;
-        	lines.Add(line);
+			line.material = lineMaterial;
+			lines.Add(line);
 		}
 
 
@@ -51,7 +54,7 @@ public class GeoDrawer : MonoBehaviour
 		float y = distanceToCenter * Mathf.Cos(latRad) * Mathf.Sin(lonRad);
 		float z = distanceToCenter * Mathf.Sin(latRad);
 
-		return new Vector3 (x,z,y);
+		return new Vector3 (x, z, y);
 
 	}
 
@@ -59,6 +62,12 @@ public class GeoDrawer : MonoBehaviour
 
 	void Update ()
 	{
+		if (Input.GetKeyUp("t"))
+		{
+			SetGeoList(GP.getDistricts());
+
+
+		}
 
 	}
 }

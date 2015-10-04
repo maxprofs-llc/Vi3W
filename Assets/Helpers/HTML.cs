@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HTMLInterface : MonoBehaviour {
-	public JSONObject data;
+	/*public JSONObject data;
 	public List<list<W3Object>> lists;
 	
 	public IEnumerator getJSON(Dictionary<string,string> query, string url) {
@@ -50,5 +50,5 @@ public class HTMLInterface : MonoBehaviour {
 		}
 		
 		this.lists = res;
-	}
+	}*/
 }
