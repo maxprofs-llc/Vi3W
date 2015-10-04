@@ -24,7 +24,6 @@ public class GeoDrawer : MonoBehaviour
 	public void SetGeoList(Dictionary<string, List<Vector2>> list)
 	{
 
-
 		foreach (KeyValuePair<string, List<Vector2>> point in list)
 		{
 
@@ -41,8 +40,24 @@ public class GeoDrawer : MonoBehaviour
 			line.material = lineMaterial;
 			lines.Add(line);
 		}
+	}
+
+	public void SetCityList(Dictionary<string, Vector2> list)
+	{
+
+		foreach (KeyValuePair<string, Vector2> point in list)
+		{
 
 
+			Vector3 xyzcity = XYZfromLatLon(point.Value.x, point.Value.y);
+			GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+			obj.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+			obj.transform.position = xyzcity;
+			obj.GetComponent<Renderer>().material.color = Color.red;
+			obj.name = point.Key;
+
+
+		}
 	}
 
 	public Vector3 XYZfromLatLon(float lat, float lon)
@@ -65,8 +80,11 @@ public class GeoDrawer : MonoBehaviour
 		if (Input.GetKeyUp("t"))
 		{
 			SetGeoList(GP.getDistricts());
+		}
 
-
+		if (Input.GetKeyUp("u"))
+		{
+			SetCityList(GP.getCities());
 		}
 
 	}
