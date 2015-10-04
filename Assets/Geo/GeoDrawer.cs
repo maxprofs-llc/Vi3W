@@ -9,7 +9,7 @@ public class GeoDrawer : MonoBehaviour
 	private Material lineMaterial;
 	private List<VectorLine> lines;
 	private float lineThickness = 4f;
-	private float distanceToCenter = 12f;
+	private float distanceToCenter = 11f;
 	private GeoParser GP;
 
 
@@ -30,14 +30,15 @@ public class GeoDrawer : MonoBehaviour
 			List<Vector3> vertexes = new List<Vector3>();
 			List<Vector2> latlon =  (List<Vector2>)point.Value;
 
-			for (int i = 0; i < latlon.Count; i++)
+			for (int i = 0; i < latlon.Count; i=i+5)
 			{
-				Vector3 xyzpoint = XYZfromLatLon(latlon[i].x, latlon[i].y);
+				Vector3 xyzpoint = XYZfromLatLon(latlon[i].y, latlon[i].x);
 				vertexes.Add(xyzpoint);
 			}
 
 			VectorLine line = new VectorLine(point.Key, vertexes, lineMaterial.GetTexture(0), lineThickness, LineType.Continuous, Joins.Weld);
 			line.material = lineMaterial;
+			line.Draw3D();
 			lines.Add(line);
 		}
 	}
@@ -49,9 +50,9 @@ public class GeoDrawer : MonoBehaviour
 		{
 
 
-			Vector3 xyzcity = XYZfromLatLon(point.Value.x, point.Value.y);
+			Vector3 xyzcity = XYZfromLatLon(point.Value.y, point.Value.x);
 			GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-			obj.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+			obj.transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
 			obj.transform.position = xyzcity;
 			obj.GetComponent<Renderer>().material.color = Color.red;
 			obj.name = point.Key;
@@ -85,6 +86,11 @@ public class GeoDrawer : MonoBehaviour
 		if (Input.GetKeyUp("u"))
 		{
 			SetCityList(GP.getCities());
+		}
+
+		for(int a = 0; a<lines.Count; a++)
+		{
+			lines[a].Draw3D();
 		}
 
 	}
