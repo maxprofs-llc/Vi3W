@@ -1,31 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
  
-/**
- * Change the camera into an orbital camera. An orbital is a camera
- * that can be rotated and that will automatically reorient itself to
- * always point to the target.
- * 
- * The orbit camera allow zooming and dezooming with the mouse wheel.
- * 
- * By clicking the mouse and dragging on the screen, the camera is moved. 
- * The angle of rotation  correspond to the distance the cursor travelled. 
- *  
- * The camera will keep the angular position when the button is pressed. To
- * rotate more, simply repress the mouse button et move the cursor.
- *
- * This script must be added on a camera object.
- *
- * @author Mentalogicus
- * @date 11-2011
- */
+
 public class OrbitCamera2 : MonoBehaviour
 {
   
- //The target of the camera. The camera will always point to this object.
+ 
  public Transform _target;
-  
- //The default distance of the camera from the target.
+ 
  public float _distance = 20.0f;
   
  //Control the speed of zooming and dezooming.
@@ -82,6 +64,31 @@ public class OrbitCamera2 : MonoBehaviour
       
    this.Rotate(_x,_y);
   }
+
+  if (Input.GetKey("d"))
+    {
+      _x -= Time.deltaTime * _xSpeed*16f;
+      this.Rotate(_x,_y);
+    }
+
+  if (Input.GetKey("a"))
+    {
+      _x += Time.deltaTime * _xSpeed*16f;
+      this.Rotate(_x,_y);
+    }
+
+  if (Input.GetKey("s"))
+    {
+      _y -= Time.deltaTime * _ySpeed*16f;
+      this.Rotate(_x,_y);
+    }
+
+  if (Input.GetKey("w"))
+    {
+      _y += Time.deltaTime * _ySpeed*16f;
+      this.Rotate(_x,_y);
+    }
+  
   
  }
   
@@ -116,6 +123,16 @@ public class OrbitCamera2 : MonoBehaviour
   {
    this.ZoomIn();
   }
+
+  if (Input.GetKey("e"))
+    {
+      this.ZoomInKey();
+    }
+
+  if (Input.GetKey("q"))
+    {
+      this.ZoomOutKey();
+    }
  
  }
   
@@ -129,6 +146,13 @@ public class OrbitCamera2 : MonoBehaviour
   _distanceVector = new Vector3(0.0f,0.0f,-_distance);
   this.Rotate(_x,_y);
  }
+
+ void ZoomInKey()
+ {
+  _distance -= _zoomStep*Time.deltaTime*3f;
+  _distanceVector = new Vector3(0.0f,0.0f,-_distance);
+  this.Rotate(_x,_y);
+ }
   
  /**
   * Increase the distance from the camera to the target and
@@ -137,6 +161,13 @@ public class OrbitCamera2 : MonoBehaviour
  void ZoomOut()
  {
   _distance += _zoomStep;
+  _distanceVector = new Vector3(0.0f,0.0f,-_distance);
+  this.Rotate(_x,_y);
+ }
+
+ void ZoomOutKey()
+ {
+  _distance += _zoomStep*Time.deltaTime*3f;
   _distanceVector = new Vector3(0.0f,0.0f,-_distance);
   this.Rotate(_x,_y);
  }
