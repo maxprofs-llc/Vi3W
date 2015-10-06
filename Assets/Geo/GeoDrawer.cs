@@ -81,11 +81,11 @@ public class GeoDrawer : MonoBehaviour
 		HTMLInterface html = new HTMLInterface();
 		List<List<W3Object>> districtData = html.getLists(new Dictionary<string, string>() , "sample-data");
 		List<List<W3Object>> districtData2 = html.getLists(new Dictionary<string, string>() , "example_humanitarian");
-		DrawTowers(districtData, Color.red, 1, 1f);
-		DrawTowers(districtData2, Color.blue, 2, 0.3f);
+		DrawTowers(districtData, Color.red, 1, 1f, 1f);
+		DrawTowers(districtData2, Color.blue, 2, 0.3f,0.8f);
 	}
 
-	public void DrawTowers(List<List<W3Object>> objects, Color clr, int type, float scale)
+	public void DrawTowers(List<List<W3Object>> objects, Color clr, int type, float scale, float edgeScale)
 	{
 		int index = 0;
 		int number = 0;
@@ -98,7 +98,7 @@ public class GeoDrawer : MonoBehaviour
 				float value = (float)ObjNumber.value + 1;
 
 				GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
-				obj.transform.localScale = new Vector3(towerEdgeSize, towerEdgeSize, towerEdgeSize * towerHeigthScale * scale * (float)value);
+				obj.transform.localScale = new Vector3(towerEdgeSize*edgeScale, towerEdgeSize*edgeScale, towerEdgeSize * towerHeigthScale * scale * (float)value);
 				obj.GetComponent<Renderer>().material.color = clr;
 				obj.name = "tower";
 

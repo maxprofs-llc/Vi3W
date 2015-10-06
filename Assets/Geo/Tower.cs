@@ -71,7 +71,16 @@ public class Tower : MonoBehaviour
 
 	void OnMouseDown()
 	{
-		Application.LoadLevel(Application.loadedLevel + 1);	
+		if (Input.GetKey ("space"))
+		{
+			GameObject target = GameObject.Find("Target");
+			TargetBehaviour trg = (TargetBehaviour)target.GetComponent("TargetBehaviour");
+			trg.GoToPosSmooth(this.transform.position);
+		}
+		else
+		{
+			Application.LoadLevel(Application.loadedLevel + 1);
+		}
 	}
 
 	void OnGUI()

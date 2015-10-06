@@ -8,6 +8,7 @@ public class OrbitCamera2 : MonoBehaviour
 
   public Transform _target;
 
+
   public float _distance = 20.0f;
 
   public float _zoomStep = 1.0f;
@@ -17,10 +18,12 @@ public class OrbitCamera2 : MonoBehaviour
   public float _ySpeed = 1f;
 
 
-  private float _x = 1000.0f;
+  private float _x = 180.0f;
   private float _y = 0.0f;
   private Vector3 velocity = Vector3.zero;
-  private Vector3 newPos = Vector3.zero;
+  private Vector3 newPos = new Vector3(8f, 8f, 16f);
+  private GameObject actualTarget;
+  private TargetBehaviour trg;
 
 
 
@@ -30,11 +33,14 @@ public class OrbitCamera2 : MonoBehaviour
   void Start ()
   {
     _distanceVector = new Vector3(0.0f, 0.0f, -_distance);
+    
+    transform.position = newPos;
+    
 
-    Vector2 angles = this.transform.localEulerAngles;
-    _x = angles.x;
-    _y = angles.y;
-
+    actualTarget = new GameObject("Target");
+    actualTarget.transform.position = _target.position;
+    trg = actualTarget.AddComponent<TargetBehaviour>();
+    trg.orb = this;
     this.Rotate(_x, _y);
 
   }
@@ -44,14 +50,15 @@ public class OrbitCamera2 : MonoBehaviour
    */
   void LateUpdate()
   {
-    if ( _target )
+    if ( _target && actualTarget)
     {
       this.RotateControls();
       this.Zoom();
-    }
 
-    transform.position = Vector3.SmoothDamp(transform.position, newPos, ref velocity, 0.2f);
-    transform.LookAt(_target);
+
+      transform.position = Vector3.SmoothDamp(transform.position, newPos, ref velocity, 0.2f);
+      transform.LookAt(actualTarget.transform);
+    }
 
   }
 
@@ -65,9 +72,6 @@ public class OrbitCamera2 : MonoBehaviour
     {
       _x += Input.GetAxis("Mouse X") * _xSpeed;
       _y += -Input.GetAxis("Mouse Y") * _ySpeed;
-
-
-
 
       this.Rotate(_x, _y);
     }
@@ -96,29 +100,33 @@ public class OrbitCamera2 : MonoBehaviour
       this.Rotate(_x, _y);
     }
 
-
   }
 
-  /**
-   * Transform the cursor mouvement in rotation and in a new position
-   * for the camera.
-   */
+
   void Rotate( float x, float y )
   {
     //Transform angle in degree in quaternion form used by Unity for rotation.
     Quaternion rotation = Quaternion.Euler(y, x, 0.0f);
 
 
-    newPos = rotation * _distanceVector + _target.position;
-    
-    
+    newPos = rotation * _distanceVector + actualTarget.transform.position;
+
+
     //transform.rotation = rotation;
     //transform.position = newPos;
   }
 
-  /**
-   * Zoom or dezoom depending on the input of the mouse wheel.
-   */
+  private void ChangeTargetPosition(Vector3 tPos)
+  {
+    trg.GoToPosSmooth(tPos);
+  }
+
+  public void ResetDistance(Vector3 newTargetPos)
+  {
+    _distance = Vector3.Magnitude(newTargetPos - transform.position);
+  }
+
+
   void Zoom()
   {
     if ( Input.GetAxis("Mouse ScrollWheel") < 0.0f )
@@ -141,6 +149,8 @@ public class OrbitCamera2 : MonoBehaviour
     }
 
   }
+
+
 
   /**
    * Reduce the distance from the camera to the target and
