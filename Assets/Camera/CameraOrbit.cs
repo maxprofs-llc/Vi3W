@@ -1,10 +1,4 @@
-﻿//
-//Filename: maxCamera.cs
-//
-// original: http://www.unifycommunity.com/wiki/index.php?title=MouseOrbitZoom
-//
-// --01-18-2010 - create temporary target, if none supplied at start
- 
+﻿ 
 using UnityEngine;
 using System.Collections;
  
@@ -51,7 +45,7 @@ public class CameraOrbit : MonoBehaviour
         currentDistance = distance;
         desiredDistance = distance;
  
-        //be sure to grab the current rotations as starting points.
+        
         position = transform.position;
         rotation = transform.rotation;
         currentRotation = transform.rotation;

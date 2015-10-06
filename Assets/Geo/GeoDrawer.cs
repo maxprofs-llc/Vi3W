@@ -9,7 +9,7 @@ public class GeoDrawer : MonoBehaviour
 	private Material lineMaterial;
 	private List<VectorLine> lines;
 	private float lineThickness = 4f;
-	private float distanceToCenter = 11f;
+	private float distanceToCenter = 10.96f;
 	private GeoParser GP;
 	private float towerEdgeSize = 0.03f;
 	private float towerHeigthScale = 1f;
